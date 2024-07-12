@@ -1,0 +1,165 @@
+/* Reset default styles and apply some basic styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Off-white background */
+    color: #000; /* Black text color */
+    overflow-y: auto; /* Enable page scrolling */
+}
+
+/* Integrate the animation styles */
+.background {
+    background: linear-gradient(132deg, #FC415A, #591BC5, #212335);
+    background-size: 400% 400%;
+    animation: Gradient 15s ease infinite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1; /* Ensure it's behind the content */
+}
+
+.cube {
+    position: absolute;
+    top: 80vh;
+    left: 45vw;
+    width: 10px;
+    height: 10px;
+    border: solid 1px #D7D4E4;
+    transform-origin: top left;
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    animation: cube 12s ease-in forwards infinite;
+}
+
+.cube:nth-child(2n) {
+    border-color: #FFF;
+}
+
+.cube:nth-child(2) {
+    animation-delay: 2s;
+    left: 25vw;
+    top: 40vh;
+}
+
+.cube:nth-child(3) {
+    animation-delay: 4s;
+    left: 75vw;
+    top: 50vh;
+}
+
+.cube:nth-child(4) {
+    animation-delay: 6s;
+    left: 90vw;
+    top: 10vh;
+}
+
+.cube:nth-child(5) {
+    animation-delay: 8s;
+    left: 10vw;
+    top: 85vh;
+}
+
+.cube:nth-child(6) {
+    animation-delay: 10s;
+    left: 50vw;
+    top: 10vh;
+}
+
+/* Your existing styles continue below */
+
+.my_projects_container {
+    max-width: 700px;
+    margin: 10px auto; /* Reduce the top and bottom margin */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.card {
+    position: relative; /* Ensure relative positioning for pseudo element */
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove box shadow */
+    padding: 15px;
+    text-align: center;
+    color: #fff; /* Set text color to white */
+    overflow: hidden; /* Ensure overflow is hidden */
+}
+
+.card__header {
+    margin-bottom: 20px; /* Add margin bottom for spacing */
+}
+
+.card__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    position: relative; /* Ensure relative positioning for pseudo element */
+}
+.card__title::before {
+    content: ''; /* Required for pseudo elements */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1); /* Blurry white background */
+    filter: blur(10px) brightness(70%); /* Apply blur and brightness */
+    z-index: -1; /* Ensure it's behind the text */
+}
+
+.card__description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.project-links {
+    text-align: center; /* Center align project links */
+}
+
+.button {
+    background-color: #222422;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #222422;
+}
+
+.projects {
+    padding: 40px 0; /* Add padding only to top and bottom */
+    box-sizing: border-box;
+}
+
+/* Animate Background */
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes cube {
+    from {
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        opacity: 1;
+    }
+    to {
+        transform: scale(20) rotate(960deg) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
