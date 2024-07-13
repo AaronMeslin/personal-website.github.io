@@ -71,12 +71,14 @@ body {
 /* Your existing styles continue below */
 
 .my_projects_container {
-    max-width: 700px;
+    max-width: 100x;
     margin: 10px auto; /* Reduce the top and bottom margin */
     padding: 10px;
     box-sizing: border-box;
 }
-
+.button {
+    margin-top: 10px; /* Adjust as needed */
+}
 .card {
     position: relative; /* Ensure relative positioning for pseudo element */
     border: none; /* Remove border */
@@ -91,10 +93,13 @@ body {
     margin-bottom: 20px; /* Add margin bottom for spacing */
 }
 
-.card__title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    position: relative; /* Ensure relative positioning for pseudo element */
+.card__title{
+    font-size: 30px; /* Adjust font size as needed */
+    margin: 0 auto; /* Center align the description */
+    max-width: 400px; /* Set a maximum width for consistency */
+    padding: 10 20px; /* Add padding inside the description */
+    position: relative; /* Ensure relative positioning for pseudo-element */
+    overflow: hidden; /* Ensure overflow is hidden */
 }
 .card__title::before {
     content: ''; /* Required for pseudo elements */
@@ -104,38 +109,31 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.1); /* Blurry white background */
-    filter: blur(10px) brightness(70%); /* Apply blur and brightness */
+    filter: blur(15px) brightness(60%); /* Apply blur and brightness */
     z-index: -1; /* Ensure it's behind the text */
 }
 
-
-.card__title::before {
-    content: ''; /* Required for pseudo elements */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.1); /* Blurry white background */
-    filter: blur(10px) brightness(70%); /* Apply blur and brightness */
-    z-index: -1; /* Ensure it's behind the text */
-}
 
 .card__description {
-    font-size: 24px;
-    margin-bottom: 10px;
-    position: relative;
+    font-size: 24px; /* Adjust font size as needed */
+    margin: 0 auto; /* Center align the description */
+    max-width: 700px; /* Set a maximum width for consistency */
+    padding: 10 20px; /* Add padding inside the description */
+    position: relative; /* Ensure relative positioning for pseudo-element */
+    overflow: hidden; /* Ensure overflow is hidden */
 }
+
+.card__title::before,
 .card__description::before {
-    content: ''; /* Required for pseudo elements */
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.1); /* Blurry white background */
-    filter: blur(10px) brightness(70%); /* Apply blur and brightness */
-    z-index: -1; /* Ensure it's behind the text */
+    right: 0; /* Extend the pseudo-element to cover the entire width */
+    bottom: 0; /* Extend the pseudo-element to cover the entire height */
+    background-color: rgba(255, 255, 255, 0.1);
+    filter: blur(15px) brightness(60%);
+    z-index: -1;
 }
 .project-links {
     text-align: center; /* Center align project links */
