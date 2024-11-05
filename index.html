@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Meslin - Portfolio</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        /* Add these custom color styles */
+        .about-card {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, rgba(127, 90, 240, 0.05) 100%);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .info-card:nth-child(1) {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, rgba(100, 255, 218, 0.02) 100%);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .info-card:nth-child(2) {
+            background: linear-gradient(135deg, rgba(127, 90, 240, 0.05) 0%, rgba(127, 90, 240, 0.02) 100%);
+            border: 1px solid rgba(127, 90, 240, 0.2);
+        }
+
+        .info-card:nth-child(3) {
+            background: linear-gradient(135deg, rgba(255, 123, 123, 0.05) 0%, rgba(255, 123, 123, 0.02) 100%);
+            border: 1px solid rgba(255, 123, 123, 0.2);
+        }
+
+        .info-card:nth-child(4) {
+            background: linear-gradient(135deg, rgba(255, 207, 115, 0.05) 0%, rgba(255, 207, 115, 0.02) 100%);
+            border: 1px solid rgba(255, 207, 115, 0.2);
+        }
+
+        /* Custom hover effects */
+        .info-card:nth-child(1):hover {
+            box-shadow: 0 15px 40px 0 rgba(100, 255, 218, 0.1);
+            border-color: rgba(100, 255, 218, 0.4);
+        }
+
+        .info-card:nth-child(2):hover {
+            box-shadow: 0 15px 40px 0 rgba(127, 90, 240, 0.1);
+            border-color: rgba(127, 90, 240, 0.4);
+        }
+
+        .info-card:nth-child(3):hover {
+            box-shadow: 0 15px 40px 0 rgba(255, 123, 123, 0.1);
+            border-color: rgba(255, 123, 123, 0.4);
+        }
+
+        .info-card:nth-child(4):hover {
+            box-shadow: 0 15px 40px 0 rgba(255, 207, 115, 0.1);
+            border-color: rgba(255, 207, 115, 0.4);
+        }
+
+        /* Custom title colors */
+        .info-card:nth-child(1) h3 { color: rgba(100, 255, 218, 0.9); }
+        .info-card:nth-child(2) h3 { color: rgba(127, 90, 240, 0.9); }
+        .info-card:nth-child(3) h3 { color: rgba(255, 123, 123, 0.9); }
+        .info-card:nth-child(4) h3 { color: rgba(255, 207, 115, 0.9); }
+
+        /* Custom icon colors */
+        .info-card:nth-child(1) i { color: rgba(100, 255, 218, 0.9); }
+        .info-card:nth-child(2) i { color: rgba(127, 90, 240, 0.9); }
+        .info-card:nth-child(3) i { color: rgba(255, 123, 123, 0.9); }
+        .info-card:nth-child(4) i { color: rgba(255, 207, 115, 0.9); }
+
+        .skill-tag {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .skill-tooltip {
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-tag:hover .skill-tooltip {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+
+        .skill-tag.active {
+            transform: scale(1.1);
+            background: rgba(100, 255, 218, 0.2);
+        }
+
+        .skill-progress {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            height: 2px;
+            background: var(--color-primary);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .skill-tag:hover .skill-progress {
+            width: 100%;
+        }
+
+        .about-image {
+            width: 150px;  /* smaller size for about section */
+            height: 150px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            margin: 0 auto 2rem auto;  /* centers the image and adds space below */
+        }
+
+        .about-headshot {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .about-headshot:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMV7HTPWDW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QMV7HTPWDW');
+    </script>
+</head>
+<body>
+    <div class="particles-container"></div>
+    
+    <main class="content">
+        <header class="hero">
+            <h1 class="hero__title">Aaron Meslin</h1>
+            <div class="hero__links">
+                <a href="https://www.linkedin.com/in/aaron-meslin-04b979222/" class="button button--primary">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="projects.html" class="button button--primary">
+                    <i class="fas fa-code"></i> Projects
+                </a>
+                <a href="mailto:aameslin@seas.upenn.edu" class="button button--primary">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </header>
+
+        <section class="about">
+            <div class="about-card">
+                <div class="about-card__content">
+                    <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+                    <div class="about-content">
+                        <div class="about-image">
+                            <img src="Headshot.jpg" alt="Professional headshot" class="about-headshot">
+                        </div>
+                        <p>Computer Science student at the University of Pennsylvania with a passion for innovation and technology. Currently pursuing a Bachelor's degree in Computer Science with an expected graduation in May 2028.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <div class="info-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-university"></i> University of Pennsylvania
+                            <span class="highlight">Candidate for Bachelors in Computer Science</span>
+                            <span class="date">May 2028</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-school"></i> St. Augustine Preparatory School
+                            <span class="highlight">4.0 GPA</span>
+                            <span class="date">2020 - 2024</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-award"></i> Honors</h3>
+                    <ul>
+                        <li><i class="fas fa-medal"></i> National Merit Commended Scholar</li>
+                        <li><i class="fas fa-medal"></i> Rensselaer Medal</li>
+                        <li><i class="fas fa-medal"></i> AP Scholar with Distinction</li>
+                        <li><i class="fas fa-medal"></i> Senator Proclamation for Non-Profit work</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-laptop-code"></i> Technical Skills</h3>
+                    <div class="skills">
+                        <span class="skill-tag">
+                            <i class="fas fa-code"></i> OCaml
+                        </span>
+                        <span class="skill-tag">
+                            <i class="fab fa-python"></i> Python
+                        </span>
+                        <span class="skill-tag">
+                            <i class="fas fa-hashtag"></i> C#
+                        </span>
+                        <span class="skill-tag">
+                            <i class="fas fa-gamepad"></i> Unity Framework
+                        </span>
+                        <span class="skill-tag">
+                            <i class="fab fa-java"></i> Java
+                        </span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                    <div class="experience-item">
+                        <h4><i class="fas fa-brain"></i> Machine Learning Research Assistant</h4>
+                        <p class="company">Rowan University</p>
+                        <p class="date">2023</p>
+                        <p>Developed training tasks and applied gradient descent and adversarial attacks to Convolutional Neural Networks. Assisted with research in Digital Speech Processing.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h4><i class="fas fa-laptop"></i> Programming Freelancer</h4>
+                        <p class="company">Fiverr</p>
+                        <p class="date">2020-Present</p>
+                        <p>Freelance C# programming work for companies and individuals globally. Served 25+ clients with high-rated performance.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h4><i class="fas fa-hands-helping"></i> Co-Founder and Director</h4>
+                        <p class="company">Cleats for Camden</p>
+                        <p class="date">2020-Present</p>
+                        <p>Collected 2000+ pairs of cleats for disadvantaged youth in Camden NJ, Cameroon, and Kenya. Publicized efforts through local soccer clubs and store partnerships.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://kit.fontawesome.com/3a9b6894e0.js" crossorigin="anonymous"></script>
+    <script>
+        // Create animated particles
+        const particlesContainer = document.querySelector('.particles-container');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = '100%';
+            
+            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 20000);
+        }
+
+        setInterval(createParticle, 200);
+
+        // Add interactive functionality to skill tags
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                // Remove active class from all tags
+                document.querySelectorAll('.skill-tag').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tag
+                tag.classList.add('active');
+                
+                // Create a ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '100%';
+                ripple.style.height = '100%';
+                ripple.style.top = '0';
+                ripple.style.left = '0';
+                ripple.style.background = 'radial-gradient(circle, rgba(100, 255, 218, 0.2) 0%, transparent 50%)';
+                ripple.style.borderRadius = 'inherit';
+                ripple.style.animation = 'ripple 0.6s linear';
+                tag.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+
+            // Add hover animation
+            tag.addEventListener('mouseenter', () => {
+                tag.style.transform = 'translateY(-5px)';
+            });
+
+            tag.addEventListener('mouseleave', () => {
+                tag.style.transform = 'translateY(0)';
+                // Remove active class when mouse leaves
+                tag.classList.remove('active');
+            });
+        });
+
+        // Add this keyframe animation to your styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    opacity: 1;
+                    transform: scale(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(2);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
