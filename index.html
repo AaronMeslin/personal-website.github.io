@@ -262,6 +262,17 @@
             0%, 100% { transform: translateY(0) rotate(0); }
             50% { transform: translateY(-10px) rotate(5deg); }
         }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, rgba(100, 255, 218, 0.9), rgba(127, 90, 240, 0.9));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMV7HTPWDW"></script>
@@ -312,7 +323,7 @@
                     <ul>
                         <li>
                             <i class="fas fa-university"></i> University of Pennsylvania
-                            <span class="highlight">Candidate for Bachelors of Engineeringin Computer Science - Intended Minors in Mathematics and Statistics</span>
+                            <span class="highlight">Candidate for Bachelors of Engineering in Computer Science - Intended Minors in Mathematics and Statistics</span>
                             <span class="date">May 2028</span>
                         </li>
                         <li>
@@ -386,6 +397,8 @@
             </div>
         </section>
     </main>
+
+    <div class="scroll-progress"></div>
 
     <script src="https://kit.fontawesome.com/3a9b6894e0.js" crossorigin="anonymous"></script>
     <script>
@@ -482,6 +495,15 @@
             }
         `;
         document.head.appendChild(style);
+
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollPx = document.documentElement.scrollTop;
+            const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = `${(scrollPx / winHeightPx) * 100}%`;
+            
+            scrollProgress.style.width = scrolled;
+        });
     </script>
 </body>
 </html>
