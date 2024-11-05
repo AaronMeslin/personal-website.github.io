@@ -134,6 +134,134 @@
         .about-headshot:hover {
             transform: scale(1.05);
         }
+
+        /* Animated typing effect for hero title */
+        .hero__title {
+            border-right: 3px solid;
+            animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--color-primary); }
+        }
+
+        /* Glowing button animation */
+        .button--primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .button--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.5),
+                        0 0 30px rgba(100, 255, 218, 0.3),
+                        0 0 45px rgba(100, 255, 218, 0.1);
+        }
+
+        .button--primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(100, 255, 218, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: glow 1.5s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .button--primary:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes glow {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        /* 3D hover effect for info cards */
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 
+                20px 20px 60px rgba(0, 0, 0, 0.2),
+                -20px -20px 60px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Enhanced title animation */
+        .hero__title {
+            animation: titleReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+                       titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleReveal {
+            0% { 
+                opacity: 0;
+                transform: translateY(20px) skewY(3deg);
+                filter: blur(10px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0) skewY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Enhanced card animations */
+        .info-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .info-card:hover {
+            animation: cardFloat 1s ease infinite alternate;
+        }
+
+        @keyframes cardFloat {
+            0% { transform: translateY(0) rotateX(0) rotateY(0); }
+            100% { transform: translateY(-10px) rotateX(5deg) rotateY(5deg); }
+        }
+
+        /* Enhanced skill tag animations */
+        .skill-tag {
+            animation: tagPop 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+
+        @keyframes tagPop {
+            0% { transform: scale(0) rotate(-10deg); }
+            70% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        /* Enhanced about image animation */
+        .about-image {
+            animation: imageFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes imageFloat {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMV7HTPWDW"></script>
@@ -149,7 +277,9 @@
     
     <main class="content">
         <header class="hero">
-            <h1 class="hero__title">Aaron Meslin</h1>
+            <h1 class="hero__title">
+                <span class="typing-animation">Aaron Meslin</span>
+            </h1>
             <div class="hero__links">
                 <a href="https://www.linkedin.com/in/aaron-meslin-04b979222/" class="button button--primary">
                     <i class="fab fa-linkedin"></i> LinkedIn
@@ -169,7 +299,7 @@
                     <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
                     <div class="about-content">
                         <div class="about-image">
-                            <img src="Headshot.jpg" alt="Professional headshot" class="about-headshot">
+                            <img src="IMG_7690.jpg" alt="Professional headshot" class="about-headshot">
                         </div>
                         <p>Computer Science student at the University of Pennsylvania with a passion for innovation and technology. Currently pursuing a Bachelor's degree in Computer Science with an expected graduation in May 2028.</p>
                     </div>
@@ -253,28 +383,48 @@
 
     <script src="https://kit.fontawesome.com/3a9b6894e0.js" crossorigin="anonymous"></script>
     <script>
-        // Create animated particles
-        const particlesContainer = document.querySelector('.particles-container');
-        
+        // Enhanced particle system
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
             
-            const size = Math.random() * 4 + 2;
+            // Random properties
+            const size = Math.random() * 6 + 2;
+            const duration = Math.random() * 15 + 10;
+            const rotation = Math.random() * 360;
+            
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
             
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = '100%';
+            // Apply random animations
+            particle.style.animation = `
+                floatUp ${duration}s linear infinite,
+                spin ${duration / 2}s linear infinite,
+                pulse ${duration / 4}s ease-in-out infinite
+            `;
             
-            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            particle.style.transform = `rotate(${rotation}deg)`;
             
             particlesContainer.appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 20000);
+            setTimeout(() => particle.remove(), duration * 1000);
         }
 
-        setInterval(createParticle, 200);
+        // Create particles more frequently
+        setInterval(createParticle, 100);
+
+        // Add scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.info-card, .about-card').forEach(el => {
+            observer.observe(el);
+        });
 
         // Add interactive functionality to skill tags
         document.querySelectorAll('.skill-tag').forEach(tag => {
