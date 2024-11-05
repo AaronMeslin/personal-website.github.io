@@ -128,5 +128,132 @@
 
         setInterval(createParticle, 200);
     </script>
+
+    <!-- Add this style section after your existing styles -->
+    <style>
+        .mouse-particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            z-index: 10000;
+        }
+
+        .mouse-particle--primary {
+            background: rgba(100, 255, 218, 0.6);
+        }
+
+        .mouse-particle--secondary {
+            background: rgba(127, 90, 240, 0.6);
+        }
+
+        .mouse-particle--accent {
+            background: rgba(255, 123, 123, 0.6);
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: translate(var(--tx), var(--ty)) rotate(360deg) scale(0);
+            }
+        }
+    </style>
+
+    <!-- Add this script before the closing </body> tag, after your existing scripts -->
+    <script>
+        class ParticleEffect {
+            constructor() {
+                this.colors = [
+                    'mouse-particle--primary',
+                    'mouse-particle--secondary',
+                    'mouse-particle--accent'
+                ];
+                this.lastX = 0;
+                this.lastY = 0;
+                this.speedX = 0;
+                this.speedY = 0;
+                
+                this.init();
+            }
+
+            init() {
+                document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                document.addEventListener('click', this.handleClick.bind(this));
+            }
+
+            createParticle(x, y, options = {}) {
+                const particle = document.createElement('div');
+                particle.className = `mouse-particle ${this.colors[Math.floor(Math.random() * this.colors.length)]}`;
+                
+                // Random properties
+                const size = options.size || Math.random() * 8 + 3;
+                const duration = options.duration || Math.random() * 1000 + 500;
+                const tx = (Math.random() - 0.5) * (options.spread || 100);
+                const ty = (Math.random() - 0.5) * (options.spread || 100);
+                
+                // Set styles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                
+                // Animation
+                const animation = options.spin ? 'spin' : 'fadeOut';
+                particle.style.animation = `${animation} ${duration}ms ${options.easing || 'ease-out'} forwards`;
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), duration);
+            }
+
+            handleMouseMove(e) {
+                // Calculate speed
+                this.speedX = e.clientX - this.lastX;
+                this.speedY = e.clientY - this.lastY;
+                const speed = Math.sqrt(this.speedX ** 2 + this.speedY ** 2);
+                
+                // Create particles based on movement speed
+                const particleCount = Math.min(Math.floor(speed / 10), 5);
+                
+                for (let i = 0; i < particleCount; i++) {
+                    this.createParticle(e.clientX, e.clientY, {
+                        size: 3 + (speed / 20),
+                        spread: 50 + (speed * 2),
+                        duration: 500 + Math.random() * 500
+                    });
+                }
+                
+                this.lastX = e.clientX;
+                this.lastY = e.clientY;
+            }
+
+            handleClick(e) {
+                // Create burst effect on click
+                for (let i = 0; i < 12; i++) {
+                    this.createParticle(e.clientX, e.clientY, {
+                        size: Math.random() * 12 + 6,
+                        spread: 200,
+                        duration: 1000 + Math.random() * 1000,
+                        spin: Math.random() > 0.5,
+                        easing: 'cubic-bezier(0.25, .1, .25, 1)'
+                    });
+                }
+            }
+        }
+
+        // Initialize the effect
+        const particleEffect = new ParticleEffect();
+    </script>
 </body>
 </html> 
